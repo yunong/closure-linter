@@ -21,7 +21,7 @@ gjslint.py is designed to be used as a PRESUBMIT script to check for javascript
 style guide violations.  As of now, it checks for the following violations:
 
   * Missing and extra spaces
-  * Lines longer than 80 characters
+  * Lines longer than 80 characters (configurable with --maxline flag)
   * Missing newline at end of file
   * Missing semicolon after function declaration
   * Valid JsDoc including parameter matching

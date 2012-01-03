@@ -41,6 +41,7 @@ import gflags as flags
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('custom_jsdoc_tags', '', 'Extra jsdoc tags to allow')
+flags.DEFINE_integer('maxline', 80, 'Maximum line length')
 
 # TODO(robbyw): Check for extra parens on return statements
 # TODO(robbyw): Check for 0px in strings
@@ -68,8 +69,6 @@ class EcmaScriptLintRules(checkerbase.LintRulesBase):
   """
 
   # Static constants.
-  MAX_LINE_LENGTH = 80
-
   MISSING_PARAMETER_SPACE = re.compile(r',\S')
 
   EXTRA_SPACE = re.compile('(\(\s|\s\))')
@@ -138,7 +137,7 @@ class EcmaScriptLintRules(checkerbase.LintRulesBase):
       # false positives at the cost of more false negatives.
       length = len(line)
 
-    if length > self.MAX_LINE_LENGTH:
+    if length > FLAGS.maxline:
 
       # If the line matches one of the exceptions, then it's ok.
       for long_line_regexp in self.GetLongLineExceptions():

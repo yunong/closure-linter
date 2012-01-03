@@ -47,6 +47,7 @@ INVERTED_AUTHOR_SPEC = re.compile(r'(?P<leading_whitespace>\s*)'
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('disable_indentation_fixing', False,
                      'Whether to disable automatic fixing of indentation.')
+flags.DEFINE_integer('maxline', 80, 'Maximum line length')
 
 
 class ErrorFixer(errorhandler.ErrorHandler):
@@ -434,9 +435,10 @@ class ErrorFixer(errorhandler.ErrorHandler):
 
         if token.IsLastInLine():
           f.write('\n')
-          if char_count > 80 and token.line_number in self._file_changed_lines:
-            print 'WARNING: Line %d of %s is now longer than 80 characters.' % (
-                token.line_number, self._file_name)
+          if (char_count > FLAGS.maxline and
+              token.line_number in self._file_changed_lines):
+            print 'WARNING: Line %d of %s is now longer than %d characters.' % (
+                token.line_number, self._file_name, FLAGS.maxline)
 
           char_count = 0
 
