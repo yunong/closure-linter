@@ -495,9 +495,6 @@ class ErrorFixer(errorhandler.ErrorHandler):
               token.line_number in self._file_changed_lines):
             print 'WARNING: Line %d of %s is now longer than %d characters.' % (
                 token.line_number, self._file_name, FLAGS.maxline)
-          if char_count > 80 and token.line_number in self._file_changed_lines:
-            print 'WARNING: Line %d of %s is now longer than 80 characters.' % (
-                token.line_number, self._file_name)
 
           char_count = 0
 
