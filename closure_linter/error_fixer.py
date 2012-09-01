@@ -50,7 +50,6 @@ INVERTED_AUTHOR_SPEC = re.compile(r'(?P<leading_whitespace>\s*)'
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('disable_indentation_fixing', False,
                      'Whether to disable automatic fixing of indentation.')
-flags.DEFINE_integer('maxline', 80, 'Maximum line length')
 
 
 class ErrorFixer(errorhandler.ErrorHandler):
